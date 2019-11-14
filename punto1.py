@@ -1,7 +1,7 @@
-'''import firebase_admin
+import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
-'''
+
 from pyfirmata import Arduino, util
 from tkinter import *
 from PIL import Image
@@ -29,12 +29,12 @@ ventana = Tk()
 ventana.geometry('800x600')
 ventana.title("Parcial")
 
-'''# Fetch the service account key JSON file contents
-cred = credentials.Certificate('key/key.json')
+# Fetch the service account key JSON file contents
+cred = credentials.Certificate('C:/Users/Labing/Documents/Parcial/key/key.json')
 # Initialize the app with a service account, granting admin privileges
 firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://clase-d2089.firebaseio.com/'
-})'''
+    'databaseURL': 'https://parcial-314e7.firebaseio.com/'
+})
 
 
 frame1 = Frame(ventana, bg="pink", highlightthickness=1, width=1280, height=800, bd= 5)
@@ -51,22 +51,24 @@ pot3=StringVar()
 
 def pot_A0():
     global prom
-    i=0
+    i=1
     prom=0
     
-    while i<1:
-        i=i+1
-        x=a_0.read()
-        print(x)
-        pot1.set(x)
-        #prom=x+prom
-        ventana.update()
-        time.sleep(0.1)
-    '''ref = db.reference('sensor')
-        ref.update({
-        'sensor1/adc': prom
+    #while i<1:
+        #i=i+1
+    x=a_0.read()
+    print(x)
+    pot1.set(x)
+    #prom=x+prom
+    ventana.update()
+    time.sleep(0.1)
+        
+    ref = db.reference('sensor')
+    ref.update({
+            
+        'sensor1/pot1': x
     })
-'''
+
 def pot_A1():
     global prom
     i=0
@@ -80,11 +82,11 @@ def pot_A1():
         #prom=x+prom
         ventana.update()
         time.sleep(0.1)
-    '''ref = db.reference('sensor')
+        ref = db.reference('sensor')
         ref.update({
-        'sensor1/adc': prom
+        'sensor1/pot2': x
     })
-'''    
+   
 
 def pot_A2():
     global prom
@@ -99,11 +101,11 @@ def pot_A2():
         #prom=x+prom
         ventana.update()
         time.sleep(0.1)
-    '''ref = db.reference('sensor')
+        ref = db.reference('sensor')
         ref.update({
-        'sensor1/adc': prom
+        'sensor1/pot3': x
     })
-'''
+
 valor.configure(textvariable=pot1)
 valor.place(x=20, y=30)
 bot1=Button(text="pot_A0",command=pot_A0)
